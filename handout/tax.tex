@@ -59,7 +59,7 @@ After completing this practical the trainee should be able to:
 \section{Introduction}
 
 \begin{note}
-In this tutorial we will look at the open source software package QIIME (pronounced ‘chime’).
+In this tutorial we will look at the open source software package QIIME (pronounced 'chime').
 \end{note}
 
 QIIME stands for Quantitative Insights Into Microbial Ecology. The package contains many tools that enable users to analyse and compare microbial communities. QIIME was originally developed to analyse of Roche 454 amplicon sequencing data. In the latest versions workflows have been added to analyze data from different sequencing platforms, such as Illumina, and different types of data, such as shotgun data. In this course we will use QIIME 1.8, which is the latest version.
@@ -74,9 +74,9 @@ We will partly re-analyze the data from Sutton et al. (2013). Impact of Long-Ter
 
 The analysis we do follows the pipeline described in the QIIME general 454 tutorial (\url{http://qiime.org/tutorials/tutorial.html}). Feel free to look at this tutorial for further background information. As our dataset used in the tutorial is a subset of the Sutton data, but more realistic for what you may be doing. In some parts of the analysis and steps we have precomputed analysis on the complete data set for comparison.
 
-Go to /home/trainee/Desktop/Taxonomy/sutton/. You will find a file called ‘sutton5000.sff’, which contains the 5000 random multiplexed reads from this study’s 26 samples with quality information and flowgrams. This is a binary file and we will need to extract the sequences and quality scores from it to be able to work with the sequences and quality scores. We will use ‘sffinfo’ from Roche to do this. This tool is not supplied with QIIME, but it is freely available from Roche on request. We have installed it for you. Alternatively, you can use the much slower tool with the same functionality supplied with QIIME
+Go to /home/trainee/Desktop/Taxonomy/sutton/. You will find a file called 'sutton5000.sff', which contains the 5000 random multiplexed reads from this study's 26 samples with quality information and flowgrams. This is a binary file and we will need to extract the sequences and quality scores from it to be able to work with the sequences and quality scores. We will use 'sffinfo' from Roche to do this. This tool is not supplied with QIIME, but it is freely available from Roche on request. We have installed it for you. Alternatively, you can use the much slower tool with the same functionality supplied with QIIME
 
-Note that in the Taxonomy folder there is a subfolder called ‘sutton_full_denoised’. This folder contains the precomputed analysis results from the full and denoised dataset. When you go through this tutorial, it is worth comparing those results with the results you obtain with the reduced dataset. 
+Note that in the Taxonomy folder there is a subfolder called 'sutton\_full\_denoised'. This folder contains the precomputed analysis results from the full and denoised dataset. When you go through this tutorial, it is worth comparing those results with the results you obtain with the reduced dataset. 
 
 \subsection{Prepare the Files}
 
@@ -94,8 +94,8 @@ sffinfo -q sutton5000.sff > sutton.qual
 
 \end{lstlisting}
 
-Note that the ‘>’ character redirects the output from the screen to a new file. Please inspect the files with ‘less’ or ‘less -S’ to truncate long lines. You will notice that there is no obvious association of the reads with a particular sample
-Or just have a look at the fasta headers and ignore the DNA sequences with the command ‘grep’. You need to extract all lines that start with ‘>’ and send the output to ‘less’ to be able to view the output one screen at a time. The command to give is:
+Note that the '>' character redirects the output from the screen to a new file. Please inspect the files with 'less' or 'less -S' to truncate long lines. You will notice that there is no obvious association of the reads with a particular sample
+Or just have a look at the fasta headers and ignore the DNA sequences with the command 'grep'. You need to extract all lines that start with '>' and send the output to 'less' to be able to view the output one screen at a time. The command to give is:
 Then view the file containing the quality scores:
 
 That is what we need to do next
@@ -112,8 +112,8 @@ less -S sutton.qual
 
 \begin{information}
 We will use the barcode information to associate reads with one of 26 samples. We will also need to remove the barcodes and primer sequences from the reads as these interfere with the taxonomic analysis. 
-You will find a file called ‘mapping.txt’ in the Taxonomy/sutton/ directory. 
-Note that this file has to be created for each analysis, as the information is specific for an experiment. The mapping file can also contain information on your experimental design. The format is very strict; columns are separated with a single TAB character; the header names have to be typed exactly as specified in the documentation. A good sample description is useful as it is used in the legends of the figures QIIME generates. We could also specify the reverse primer and remove it from the reads. Unfortunately, the reverse primer sequence was not in the paper, and we’ll ignore it though we could probably deduce it from longer reads: as a 466 bp region of the 16S ribosomal RNA gene flanking the V3 and V4 regions was amplified, you’ll have a clue where to look for the reverse primer.
+You will find a file called 'mapping.txt' in the Taxonomy/sutton/ directory. 
+Note that this file has to be created for each analysis, as the information is specific for an experiment. The mapping file can also contain information on your experimental design. The format is very strict; columns are separated with a single TAB character; the header names have to be typed exactly as specified in the documentation. A good sample description is useful as it is used in the legends of the figures QIIME generates. We could also specify the reverse primer and remove it from the reads. Unfortunately, the reverse primer sequence was not in the paper, and we'll ignore it though we could probably deduce it from longer reads: as a 466 bp region of the 16S ribosomal RNA gene flanking the V3 and V4 regions was amplified, you'll have a clue where to look for the reverse primer.
 
 \end{information}
 
@@ -126,7 +126,7 @@ validate_mapping_file.py -m mapping.txt -o mapping_output
 \end{steps}
 
 \begin{note}
-There shouldn’t be any errors. If there are errors, a corrected mapping file will be written to the directory mapping_output
+There shouldn't be any errors. If there are errors, a corrected mapping file will be written to the directory mapping\_output
 \end{note}
 
 \subsection{Assign samples to the reads}
@@ -156,7 +156,7 @@ Here we specify the following options:\\
 \subsection{Questions and Answers}
 
 \begin{questions}
-When completed please enter the directory ‘split_library_output’ and have a look at the log file. It contains detailed information what was done during the step we’ve just performed. Note that the number of reads assigned to the different samples varies considerably. Knowing where the individual samples were taken may give a clue why this may be! Next have a quick look at the file seqs.fna. What has changed to the header of the reads?
+When completed please enter the directory 'split\_library\_output' and have a look at the log file. It contains detailed information what was done during the step we've just performed. Note that the number of reads assigned to the different samples varies considerably. Knowing where the individual samples were taken may give a clue why this may be! Next have a quick look at the file seqs.fna. What has changed to the header of the reads?
 
 \begin{answer}
 Look at the split libraries results
@@ -179,12 +179,12 @@ less -S seqs.fna
 
 \section{To denoise or not to denoise?}
 
-The pyrosequencing technology employed by 454 sequencing machines produces characteristic sequencing errors, mostly imprecise signals for longer homopolymers runs. Most of the sequences contain none or only a few errors, but a few sequences contain enough errors to be classified as an additional rare OTU. The goal for the denoising procedure is to reduce the number of erroneous OTUs and thus increasing the accuracy of the whole QIIME pipeline. This is a computationally intensive procedure, which we will skip for this reason. There is a QIIME tutorial that outlines the steps (\url{http://qiime.org/tutorials/denoising_454_data.html}) and also includes a warning about new 454 flow patterns introduced in 2012. Note that only amplicon data sets can be denoised with the described procedure. We will not denoise our data today. We did denoise the full dataset in the sutton_full_denoised folder.
+The pyrosequencing technology employed by 454 sequencing machines produces characteristic sequencing errors, mostly imprecise signals for longer homopolymers runs. Most of the sequences contain none or only a few errors, but a few sequences contain enough errors to be classified as an additional rare OTU. The goal for the denoising procedure is to reduce the number of erroneous OTUs and thus increasing the accuracy of the whole QIIME pipeline. This is a computationally intensive procedure, which we will skip for this reason. There is a QIIME tutorial that outlines the steps (\url{http://qiime.org/tutorials/denoising_454_data.html}) and also includes a warning about new 454 flow patterns introduced in 2012. Note that only amplicon data sets can be denoised with the described procedure. We will not denoise our data today. We did denoise the full dataset in the sutton\_full\_denoised folder.
 
 
 \section{Picking Operational Taxonomic Units (OTUs)}
 We will now use a workflow for de novo OTU picking, taxonomy assignment, phylogenetic tree construction, and OTU table construction QIIME has several workflows to pick OTUs, we will be using the one described in the general overview tutorial (\url{http://qiime.org/tutorials/tutorial.html}) It has 7 steps, which are described in some detail in this tutorial. 
-The described procedure is run with the command from the Taxonomy directory. This step takes about 12mins to run. Please read through the different steps (\url{http://qiime.org/tutorials/tutorial.html}) and try to understand the procedure. Remember that an OTU is not the same as a species, but a ‘bag/cluster’ of highly similar sequences (at least 97\% is common for bacteria/archaea), or a single sequence in case of rare OTUs.
+The described procedure is run with the command from the Taxonomy directory. This step takes about 12mins to run. Please read through the different steps (\url{http://qiime.org/tutorials/tutorial.html}) and try to understand the procedure. Remember that an OTU is not the same as a species, but a 'bag/cluster' of highly similar sequences (at least 97\% is common for bacteria/archaea), or a single sequence in case of rare OTUs.
 
 \begin{steps}
 Pick de novo OTUs:
@@ -195,16 +195,14 @@ pick_de_novo_otus.py -i split_library_output/seqs.fna -o otus
 \end{steps}
 
 \begin{note}
-\begin{description}[style=multiline,labelindent=0cm,align=right,leftmargin=\descriptionlabelspace,rightmargin=1.5cm,font=\ttfamily]
 
-Please do spend some time looking at the output of this pipeline. In particular the file ‘seqs_rep_set_tax_assignments.txt’ in the ‘uclust_assigned_taxonomy’ directory. By default QIIME uses the Greengenes 16S reference database to assign taxonomy. It has the following levels: kingdom, phylum, class, order, family, genus, and species. It will be immediately clear that most reads cannot be classified up to species level.
-As described in step 6 of the QIIME overview tutorial, the pipeline creates a Newick-formatted phylogenetic tree (rep_set.tre) in the otus directory. You can run the program ‘figtree’ from the terminal, a graphic interface will be launched by typing ‘figtree’ then hit the return key.
+Please do spend some time looking at the output of this pipeline. In particular the file 'seqs\_rep\_set\_tax\_assignments.txt' in the 'uclust\_assigned\_taxonomy' directory. By default QIIME uses the Greengenes 16S reference database to assign taxonomy. It has the following levels: kingdom, phylum, class, order, family, genus, and species. It will be immediately clear that most reads cannot be classified up to species level.
+As described in step 6 of the QIIME overview tutorial, the pipeline creates a Newick-formatted phylogenetic tree (rep\_set.tre) in the otus directory. You can run the program 'figtree' from the terminal, a graphic interface will be launched by typing 'figtree' then hit the return key.
 
-View the tree by opening the file ‘rep_set.tre’ in the ‘otus’ folder (Desktop->Taxonomy->otus). The tree that is produced is too complex to be of much use. We will look at a different tool, Megan 5, which produces a far more useful tree.
-In step 7 of the QIIME overview tutorial a file called otu_table.biom is generated. It is in biom-format, which is increasingly supported by taxonomic software developers. One of the tools that support the BIOM format is Megan (\url{http://ab.inf.uni-tuebingen.de/software/megan5/}). Megan is a standalone tool for analyzing both taxonomic and functional content of datasets. It is free for academic use, but you will need to request a licence first. We will use Megan version 5 to display a taxonomic tree using the BIOM output we have just produced.
+View the tree by opening the file 'rep\_set.tre' in the 'otus' folder (Desktop->Taxonomy->otus). The tree that is produced is too complex to be of much use. We will look at a different tool, Megan 5, which produces a far more useful tree.
+In step 7 of the QIIME overview tutorial a file called otu\_table.biom is generated. It is in biom-format, which is increasingly supported by taxonomic software developers. One of the tools that support the BIOM format is Megan (\url{http://ab.inf.uni-tuebingen.de/software/megan5/}). Megan is a standalone tool for analyzing both taxonomic and functional content of datasets. It is free for academic use, but you will need to request a licence first. We will use Megan version 5 to display a taxonomic tree using the BIOM output we have just produced.
 Note: Sequence errors can give rise to spurious OTUs, we can filter out OTUs that only contain a single sequence (singletons). QIIME allows you to do this quite easily – or you could also remove abundant taxa if you are more interested in rare taxa.
 
-\end{description}
 \end{note}
 
 \begin{steps}
@@ -228,10 +226,7 @@ Megan can be opened from the terminal by typing MEGAN. If you are asked for a li
 \end{steps}
 
 \begin{note}
-\begin{description}[style=multiline,labelindent=0cm,align=right,leftmargin=\descriptionlabelspace,rightmargin=1.5cm,font=\ttfamily]
-
 From the File menu select Import -> BIOM format. Find your biom file and import it. Megan will generate a tree that is far more informative than the one produced with FigTree. You can change the way Megan displays the data by clicking on the various icons and menu items. Please spend some time exploring your data. The Word Cloud visualization is interesting, too, if you want to find out which samples are similar and which samples stand out.
-\end{description}
 \end{note}
 
 \section{View OTU statistics}
@@ -263,7 +258,7 @@ summarize_taxa_through_plots.py -i otus/otu_table.biom -o  wf_taxa_summary -m ma
 
 \begin{steps}
 To view the output, open a web browser from the Applications -> Internet menu. You can use Google chrome, Firefox or Chromium.
-In Google chrome or Chromium, type CTRL-O, or in Firefox use the File menu to select Desktop ->Taxonomy -> wf_taxa_summary -> taxa_summary_plots and open either area_charts.html or bar_chars.html. I prefer the bar charts myself. The top chart visualizes taxonomic composition at phylum level for each of the samples. The next chart goes down to class level and following charts go another level up again. The charts (particularly the ones more at the top) are very useful for discovering how the communities in your samples differ from each other. There is a similar plot in the paper, if you have time, see how our analysis compares with the one described in the paper.
+In Google chrome or Chromium, type CTRL-O, or in Firefox use the File menu to select Desktop ->Taxonomy -> wf\_taxa\_summary -> taxa\_summary\_plots and open either area\_charts.html or bar\_chars.html. I prefer the bar charts myself. The top chart visualizes taxonomic composition at phylum level for each of the samples. The next chart goes down to class level and following charts go another level up again. The charts (particularly the ones more at the top) are very useful for discovering how the communities in your samples differ from each other. There is a similar plot in the paper, if you have time, see how our analysis compares with the one described in the paper.
 
 \end{steps}
 
@@ -278,16 +273,16 @@ alpha_rarefaction.py -i otus/otu_table.biom -m mapping.txt -o wf_arare -t otus/r
 \end{lstlisting}
 \end{steps}
 
-First we are going to view the rarefaction curves in a web browser by opening /home/trainee/Desktop/Taxonomy/sutton/wf_arare/alpha_rarefaction_plots/rarefaction_plots.html. 
-To start select as metric ‘chao1’ and select as category ‘Description’. It is clear that the microbial diversity in some samples is much higher than in other samples. Click around in the legend as this will help you work out which line corresponds with which sample. If you have time you could try to correlate species richness with environmental data from the paper and establish whether our analysis confirms the findings of the authors.
+First we are going to view the rarefaction curves in a web browser by opening /home/trainee/Desktop/Taxonomy/sutton/wf\_arare/alpha\_rarefaction\_plots/rarefaction\_plots.html. 
+To start select as metric 'chao1' and select as category 'Description'. It is clear that the microbial diversity in some samples is much higher than in other samples. Click around in the legend as this will help you work out which line corresponds with which sample. If you have time you could try to correlate species richness with environmental data from the paper and establish whether our analysis confirms the findings of the authors.
 Next view the precomputed rarefaction curves which show an increased sequencing depth.
 
-In general the more reads you have, the more OTUs you will observe. If a rarefaction curve start to flatten, it means that you have probably sequenced at sufficient depth, in other words, producing more reads will not significantly add more OTUs. If on the other hand hasn’t flattened, you have not sampled enough to capture enough of the microbial diversity and by extrapolating the curve you may be able to estimate how many more reads you will need. Consult the QIIME overview tutorial for further information.
+In general the more reads you have, the more OTUs you will observe. If a rarefaction curve start to flatten, it means that you have probably sequenced at sufficient depth, in other words, producing more reads will not significantly add more OTUs. If on the other hand hasn't flattened, you have not sampled enough to capture enough of the microbial diversity and by extrapolating the curve you may be able to estimate how many more reads you will need. Consult the QIIME overview tutorial for further information.
 
 \section{Beta diversity and beta diversity plots}
 
 Before we have a quick look at taxonomic analysis of shotgun data, we have a quick look at beta diversity analysis, which is the assessment of differences between microbial communities. As we have already observed, our samples contain different numbers of sequences. 
-The first step is to remove sample heterogeneity by randomly selecting the same number of reads from every sample. This number corresponds to the ‘minimum’ number recorded when you looked at the OTU statistics. 
+The first step is to remove sample heterogeneity by randomly selecting the same number of reads from every sample. This number corresponds to the 'minimum' number recorded when you looked at the OTU statistics. 
 
 \begin{steps}
 Now run the following command
@@ -301,7 +296,7 @@ Read through the beta diversity compute section of the QIIME overview tutorial a
 
 \section{Closed reference OTU picking of 16S ribosomal rRNA fragments selected from a shotgun data set}
 
-In a closed-reference OTU picking process, reads are clustered against a reference sequence collection and any reads, which do not hit a sequence in the reference sequence collection, are excluded from downstream analyses. In QIIME, pick_closed_reference_otus.py is the primary interface for closed-reference OTU picking in QIIME. If the user provides taxonomic assignments for sequences in the reference database, those are assigned to OTUs. We could use this approach to perform taxonomic analysis on shotgun data. We need to perform the following steps:\\
+In a closed-reference OTU picking process, reads are clustered against a reference sequence collection and any reads, which do not hit a sequence in the reference sequence collection, are excluded from downstream analyses. In QIIME, pick\_closed\_reference\_otus.py is the primary interface for closed-reference OTU picking in QIIME. If the user provides taxonomic assignments for sequences in the reference database, those are assigned to OTUs. We could use this approach to perform taxonomic analysis on shotgun data. We need to perform the following steps:\\
 1.	Extract those reads from the data set that contain 16S ribosomal RNA sequence. If there are less than (e.g.) 100 nucleotides of rRNA sequence, the read should be discarded.\\
 2.	Remove non-rRNA sequence (flanking regions) from those reads\\
 3.	Run closed-reference OTU picking workflow\\
@@ -323,13 +318,13 @@ rRNASelector
 \end{lstlisting}
 \end{steps}
 
-A graphical interface should appear. Note interaction with the interface may have a few seconds lag. Load the sequence file by clicking on ‘File Choose’ at the top and navigate to the file A7A-paired.fasta. Select the file and click ‘Open’. The tool will automatically fill in file names for the result files. Change the Number of CPUs to ‘2’, select Prokaryote 16S (to include both bacterial and archaeal 16S sequences) and specify the location of the hmmsearch file by clicking the second ‘File Choose’ button. Type in manually the location ‘/usr/bin/hmmsearch’, then click process. The run should take a few minutes to complete.
+A graphical interface should appear. Note interaction with the interface may have a few seconds lag. Load the sequence file by clicking on 'File Choose' at the top and navigate to the file A7A-paired.fasta. Select the file and click 'Open'. The tool will automatically fill in file names for the result files. Change the Number of CPUs to '2', select Prokaryote 16S (to include both bacterial and archaeal 16S sequences) and specify the location of the hmmsearch file by clicking the second 'File Choose' button. Type in manually the location '/usr/bin/hmmsearch', then click process. The run should take a few minutes to complete.
 
-If all went well, you can close rRNASelector by clicking on Exit. You will have 3 new files in your directory, one containing untrimmed 16S reads, one containing trimmed 16S reads (A7A-paired.prok.16s.trim.fasta; that’s the one we want) and a file containing reads that do not contain (sufficient) 16S sequence.
+If all went well, you can close rRNASelector by clicking on Exit. You will have 3 new files in your directory, one containing untrimmed 16S reads, one containing trimmed 16S reads (A7A-paired.prok.16s.trim.fasta; that's the one we want) and a file containing reads that do not contain (sufficient) 16S sequence.
 
 \section{Closed-reference OTU picking workflow and visualization of results in Megan 5}
 \begin{steps}
-We are now ready to pick our OTUs. We do that by running the following command (all on one line and no space after gg_otus-12-10):
+We are now ready to pick our OTUs. We do that by running the following command (all on one line and no space after gg\_otus-12-10):
 
 \begin{lstlisting}
 pick_closed_reference_otus.py -i A7A-paired.prok.16s.trim.fasta -o ./cr_uc -r /mnt/workshop/tools/qiime_software/gg_otus-12_10-release/rep_set/97_otus.fasta -t /mnt/workshop/tools/qiime_software/gg_otus-12_10-release/taxonomy/97_otu_taxonomy.txt
@@ -338,7 +333,7 @@ pick_closed_reference_otus.py -i A7A-paired.prok.16s.trim.fasta -o ./cr_uc -r /m
 
 \begin{steps}
 We need to specify the following options. 
-The command will take several minutes to run. When finished open Megan as described before, import the otu_table.biom file and explore the results.
+The command will take several minutes to run. When finished open Megan as described before, import the otu\_table.biom file and explore the results.
 
 \begin{lstlisting}
 -i input_file.fasta
@@ -355,14 +350,14 @@ Many of you will send off samples to be sequenced and quite often providers prep
 
 This is an exercise in understanding the format QIIME expects and how you can reformat data to allow analysis in QIIME.
 There is a directory in your Taxonomy folder called “Baltic”, with data from the Baltic Sea. It has a number of samples that were sequenced using 454 technology and are demultiplexed, but for the purpose of this exercise, these could have been Illumina files as the format is fastq. 
-The challenge we give you is to write down how we need to reformat this data (even if you do not know how) to be able to perform a similar analysis we have done with the Red Sea data. This is something you can in a small group if you feel you’re not quite up to the challenge. 
+The challenge we give you is to write down how we need to reformat this data (even if you do not know how) to be able to perform a similar analysis we have done with the Red Sea data. This is something you can in a small group if you feel you're not quite up to the challenge. 
 
 Hints:
-Consider using the QIIME function split_libraries_fastq.py
+Consider using the QIIME function split\_libraries\_fastq.py
 
 \subsection{Questions and Answers}
 \begin{questions}
-What does the mapping file (that’s needed) look like to run split_libraries_fastq.py? 
+What does the mapping file (that's needed) look like to run split\_libraries\_fastq.py? 
 \begin{answer}
 Need to place answer.
 \end{answer}
